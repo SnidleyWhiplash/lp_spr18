@@ -1,0 +1,66 @@
+;	display first (10) integers
+;|==================================|
+;|	for (int i = 1; i <= 10; i++) { |
+;|		print(i + " ");             |
+;|	}								|
+;|									|
+;|	for (int j = 1; j <= 10; j++) {	|
+;|		println(j);					|
+;|	}								|
+;|==================================|
+
+
+				pc		msg1
+				sout
+
+				pc		i
+				pc		1
+				stav
+i_loop:		
+				p		i
+				p		max
+				cmpu	6
+				jz		i_loop_exit
+				p		i
+				dout
+				pc		' '
+				aout
+				pc		i
+				p		i
+				pc		1
+				add
+				stav
+				ja		i_loop
+i_loop_exit:
+				pc		'\n'
+				aout
+				pc		msg2
+				sout
+				pc		'\n'
+				aout
+				
+				pc		j
+				pc		1
+				stav
+j_loop:
+				p		j
+				p		max
+				cmpu	6
+				jz		j_loop_exit
+				p		j
+				dout
+				pc		'\n'
+				aout
+				pc		j
+				p		j
+				pc		1
+				add
+				stav
+				ja		j_loop	
+j_loop_exit:				
+				halt
+i:				dw		0
+j:				dw		0
+max:			dw		10
+msg1:			dw		"i loop: "
+msg2:			dw		"j loop: "

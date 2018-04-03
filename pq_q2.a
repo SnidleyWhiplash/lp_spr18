@@ -1,0 +1,71 @@
+;	input two positive integers, 'a' and 'b', such that 'a < b'
+;	compute and display the sum of all integers [a, b] inclusive
+;|==================================|
+;|	int sum = 0;					|
+;|									|
+;|	for (int i = a; i <= b; i++) {	|
+;|		sum = sum + i;				|
+;|	}								|
+;|	println(sum);					|
+;|==================================|
+
+a_prompt:			pc		a_msg
+					sout
+					pc		a
+					din
+					stav
+					p		a
+					pc		0		
+					cmps	1
+					jp		b_prompt
+					pc		neg_err_msg
+					sout
+					pc		'\n'
+					aout
+					ja		a_prompt
+b_prompt:			pc		b_msg
+					sout
+					pc		b
+					din
+					stav
+					p		b
+					p		a
+					cmps	1
+					jp		continue
+					pc		b_err_msg
+					sout
+					pc		'\n'
+					aout
+					ja		b_prompt
+					
+continue:			pc		i
+					p		a
+					stav
+loop:
+					p		i
+					p		b
+					cmpu	6
+					jz		loop_exit
+					pc		sum
+					p		sum
+					p		i
+					add
+					stav
+					pc		i
+					p		i
+					pc		1
+					add
+					stav
+					ja		loop
+loop_exit:
+					p		sum
+					dout
+					halt
+a:					dw		0
+b:					dw		0
+i:					dw		0
+sum:				dw		0
+a_msg:				dw		"Enter 'a' value: "
+b_msg:				dw		"Enter 'b' value: "
+neg_err_msg:		dw		"Invalid. value must be positive"
+b_err_msg:			dw		"Invalid. 'b' must be greater than 'a'"
